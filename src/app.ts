@@ -1,7 +1,7 @@
 import type { PinoLogger } from "hono-pino";
 
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { notFound, onError } from "stoker/middlewares";
+import { notFound, onError, serveEmojiFavicon } from "stoker/middlewares";
 
 import { pinoLogger } from "./middlewares/pino-logger";
 
@@ -12,6 +12,8 @@ interface AppBindigs {
 }
 
 const app = new OpenAPIHono<AppBindigs>();
+// This is to avoid 404 errors when the favicon is requested
+app.use(serveEmojiFavicon("🧼"));
 app.use(pinoLogger());
 
 app.get("/", (c) => {
