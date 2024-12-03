@@ -5,7 +5,7 @@ import { notFound, onError, serveEmojiFavicon } from "stoker/middlewares";
 import type { AppBindigs } from "./types";
 
 function createApp() {
-  const app = new OpenAPIHono<AppBindigs>();
+  const app = new OpenAPIHono<AppBindigs>({ strict: false });
   // To avoid 404 errors when the favicon is requested
   app.use(serveEmojiFavicon("🧼"));
 
